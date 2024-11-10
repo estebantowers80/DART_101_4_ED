@@ -7,6 +7,8 @@
 ///
 
 void main() {
-  /// print -> funcion u obejeto que imprime un valor
+  /// print -> función u objeto que imprime un valor
   print("Hola Mundo, soy Esteban :D");
+
+  print("       hola ET     \n hola otra vez");
 }
