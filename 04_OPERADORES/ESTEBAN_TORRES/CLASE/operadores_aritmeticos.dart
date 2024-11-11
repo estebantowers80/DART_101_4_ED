@@ -22,5 +22,5 @@ void main(){
   print(mensaje2);
   print(" EL RESULTADO DE LA SUMA ES $suma");
 
-    print("SE PUEDE REALIZAR SUMAS ASI ${1 + 1}");
+  print("SE PUEDE REALIZAR SUMAS ASI ${1 + 1}");
 }
