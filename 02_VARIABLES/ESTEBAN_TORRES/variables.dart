@@ -18,13 +18,18 @@ void main(){
   ///
   ///final -> se asigna su espacio de memoria al ejecutar
   ///
-  
-  const velocidadSonido = "630";
-  final diaSemana = "Lunes";
 
-  print(nombre);
+  //print(nombre);
   print(edad);
   print(variable_global);
 
+
+  //Variables que puede cambiar 
+  String apellido = "Cangui";
+  apellido = "Torres";
+
+  const velocidadSonido = "630";
+  final String diaSemana = "Lunes";
+  print(diaSemana);
 
 }
