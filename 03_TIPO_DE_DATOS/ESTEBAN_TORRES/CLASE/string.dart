@@ -16,7 +16,7 @@ void main(){
   String comillasMultiples2 = 'It\'s';
   print(comillasMultiples2);
 
-  //string con multiples lineas
+  //string con multiples lineas   se puede usar simples o dobles
   String texto = 
   '''Markdown es un lenguaje de marcado que 
                     permite dar formato a textos sin formato, como agregar vínculos, 
