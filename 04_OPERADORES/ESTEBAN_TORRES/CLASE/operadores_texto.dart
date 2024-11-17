@@ -28,6 +28,10 @@ void main(){
   List<String> lista_string = resultado.split("");
   print("split $lista_string ");
   
+  //TRIM elimina espacios
+  mensaje2 = "  eliminar espacios  ";
+  print("     $mensaje2     ".trim());
 
+  print("$mensaje2".trimLeft());
 
 }
