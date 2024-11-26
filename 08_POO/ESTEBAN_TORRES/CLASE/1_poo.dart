@@ -2,17 +2,16 @@
 POO
 class -> definir o crear clases
  */
-import 'dart:async';
-import 'dart:convert';
 
 void main() {
   final pepito = Usuario(
       apellido: "PEREZ",
       nombre: "PEPITO",
       contrasena: "Clave123.",
-      ciudad: "Cuenca"); 
-  
-  final richard = Usuario(nombre: 'RICHARD', apellido: 'SANCHEZ', contrasena: 'SN');
+      ciudad: "Cuenca");
+
+  final richard =
+      Usuario(nombre: 'RICHARD', apellido: 'SANCHEZ', contrasena: 'SN');
 
   //accedemos al nombre
   print(pepito.nombre);
@@ -25,8 +24,12 @@ void main() {
   print(pepito.nombre);
 
   //setter
-  richard.actualizarNombre="Richi";
+  richard.actualizarNombre = "Richi";
   print(richard.nombre);
+
+  //uso del otro constructor
+  final userVacio = Usuario.vacio();
+  print("uso de constructor vacio:  $userVacio  nombre: ${userVacio.nombre}");
 }
 
 /// Clase usuario
@@ -44,16 +47,23 @@ class Usuario {
   String nombre;
   String apellido;
   String contrasena;
+  String? ciudad;
 
   //Constructor -> construye nuestra clase
-  Usuario(
-      {required this.nombre, 
-      required this.apellido, 
-      required this.contrasena,
-      String ciudad =""});
- 
-     
+  Usuario({
+    required this.nombre,
+    required this.apellido,
+    required this.contrasena,
+    this.ciudad = "",
+  });
 
+  //otro constructor 
+  Usuario.vacio({
+    this.nombre = "",
+    this.apellido = "",
+    this.contrasena ="",
+    this.ciudad = "",
+  });
   //Métodos
   void iniciarSesion({required String email}) {
     print("Inicia sesión con el email: $email");
@@ -67,8 +77,6 @@ class Usuario {
   //Setters -> editar los valores de la clase   -  set
   //solo actualiza algo dentro de la clase
   set actualizarNombre(String value) {
-    nombre = value;
+    this.nombre = value;
   }
 }
-
-
