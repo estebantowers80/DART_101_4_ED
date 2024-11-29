@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 void main(){
   final perro = Animal(nombre: 'BOBY',edad: 2);

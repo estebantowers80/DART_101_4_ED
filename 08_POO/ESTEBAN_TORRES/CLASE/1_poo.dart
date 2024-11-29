@@ -30,6 +30,26 @@ void main() {
   //uso del otro constructor
   final userVacio = Usuario.vacio();
   print("uso de constructor vacio:  $userVacio  nombre: ${userVacio.nombre}");
+
+
+  /// Qué puedo hacer con estos objetos
+  /// Esto es nada escalable
+  // final Map<String, dynamic> pepito2 = {
+  //   "nombre": "Pepito",
+  //   "apellido": "Apellido",
+  //   "contraseña": "1234",
+  // };
+  // print(pepito2["nombre"]);
+  print ("\nse tiene una forma mas estructurada");
+  print (pepito.nombre);
+  print (pepito.apellido);
+  print (pepito.ciudad);
+
+  //metodo
+  pepito.iniciarSesion(email: "correo");
+
+  //seters
+  print("setter:  ${pepito.nombreApellido}");
 }
 
 /// Clase usuario
@@ -57,7 +77,7 @@ class Usuario {
     this.ciudad = "",
   });
 
-  //otro constructor 
+  //otro constructor vacio
   Usuario.vacio({
     this.nombre = "",
     this.apellido = "",
