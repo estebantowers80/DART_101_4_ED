@@ -7,6 +7,10 @@ class AlertsScreen extends StatelessWidget {
   static const routeName = "/alerts-screen";
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Alertas"),
+      ),
+    );
   }
 }
