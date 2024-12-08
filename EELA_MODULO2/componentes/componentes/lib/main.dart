@@ -1,7 +1,7 @@
 
-import 'package:componentes/utils/routes.dart';
 import 'package:flutter/material.dart';
-import 'screens/home_screen.dart';
+import 'package:componentes/utils/routes.dart';  // importamos el archivo de rutas
+import 'screens/home_screen.dart';               // importamos la pantalla del home  
 
 void main() => runApp(const MyApp());
 
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Material App',
       /// Definimos nuestras rutas del archivo routes.dart
-      routes: routes,
+      routes: routes,  
       /// definimos nuestra pantalla inicial mediante el nombre
       initialRoute: HomeScreen.routeName,   
     );

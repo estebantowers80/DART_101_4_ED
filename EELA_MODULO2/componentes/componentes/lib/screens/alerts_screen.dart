@@ -23,6 +23,7 @@ class AlertsScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
+          
           //https://api.flutter.dev/flutter/material/showDialog.html
           // ALERTA ANDROID
           TextButton(
@@ -93,9 +94,68 @@ class AlertsScreen extends StatelessWidget {
               },
               child: const Text("Alerta iOS")),
           // ALERTA POR PLATAFORMA
-          TextButton(onPressed: () {}, child: Text("Alerta por Plataforma")),
+          TextButton(
+              onPressed: () {
+                /// 1. showDialog
+                /// 2. AlerDialog.adaptative
+                /// 3. Agregar botones que son adalptables
+
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog.adaptive(
+                      title: const Text("Alerta por plataforma"),
+                      content: const Text(
+                          "Este es el contenido de la alerta multiplataforma"),
+                      actions: [
+                        adaptiveAction(
+                          context: context,
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text("Cerrar"),
+                        ),
+                        adaptiveAction(
+                          context: context,
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text("Aceptar"),
+                        ),
+
+                      ],
+                    );
+                  },
+                );
+              },
+              child: const Text("Alerta por Plataforma")),
         ],
       ),
     );
+  }
+
+  ///codigo que permite hacer un boton de accion adaptativo
+  ///esto es propuesto por el mismo equipo de flutter
+  ///te pide como requerido un context ->identifica donde renderisasse, onpress  para la accion de precionar y child
+  ///widget que ter permite renderisar el contenido internamente
+  ///
+  ///colocar este metodo antes de que se cierre la ultima llave
+  Widget adaptiveAction({
+    required BuildContext context,
+    required VoidCallback onPressed,
+    required Widget child,
+  }) {
+    final ThemeData theme = Theme.of(
+        context); // pmerite determinar que plataforma es por medio del Theme
+    switch (theme.platform) {
+      case TargetPlatform.android:
+      case TargetPlatform.fuchsia:
+      case TargetPlatform.linux:
+      case TargetPlatform.windows:
+        return TextButton(onPressed: onPressed, child: child);
+      case TargetPlatform.iOS:
+      case TargetPlatform.macOS:
+        return CupertinoDialogAction(onPressed: onPressed, child: child);
+    }
   }
 }
