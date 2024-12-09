@@ -1,3 +1,7 @@
+import 'package:componentes/screens/forms_2_screen.dart';
+
+import 'forms_screen_2.dart';
+
 import 'alerts_screen.dart';
 import 'animations_screen.dart';
 import 'buttons_screen.dart';
@@ -88,7 +92,7 @@ class HomeScreen extends StatelessWidget {
               trailing: const Icon(Icons.add_alert_sharp),
               leading: const Icon(Icons.account_balance_outlined)),
           ListTile(
-              title: const Text("Formularios"),
+              title: const Text("Imagenes"),
               onTap: () {
                 Navigator.pushNamed(context, FormsScreen.routeName);
               },
@@ -107,6 +111,20 @@ class HomeScreen extends StatelessWidget {
                  Navigator.pushNamed(context, AnimationsScreen.routeName);
               },
               trailing: const Icon(Icons.ac_unit_rounded),
+              leading: const Icon(Icons.account_balance_outlined)),
+          ListTile(
+              title: const Text("Formularios"),
+              onTap: () {
+                Navigator.pushNamed(context, FormsScreen2.routeName);
+              },
+              trailing: const Icon(Icons.add_card_rounded),
+              leading: const Icon(Icons.account_balance_outlined)),
+         ListTile(
+              title: const Text("Formularios2"),
+              onTap: () {
+                Navigator.pushNamed(context, Forms2Screen.routeName);
+              },
+              trailing: const Icon(Icons.add_card_rounded),
               leading: const Icon(Icons.account_balance_outlined)),
         ],
       ),
