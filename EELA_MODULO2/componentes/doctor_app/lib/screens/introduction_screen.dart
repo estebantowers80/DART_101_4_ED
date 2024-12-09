@@ -20,11 +20,11 @@ class IntroductionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: const Color(0xffFFFFFF),
+      backgroundColor: const Color(0xffFFFFFF),  //FONDO BLANCO DE PANTALLA 
       body: SafeArea(
         child: Padding(
           padding:
-              const EdgeInsets.all(15.0), //widget para agregar marge interno
+              const EdgeInsets.all(30.0), //widget para agregar marge interno
           child: Column(
             crossAxisAlignment:
                 CrossAxisAlignment.start, //alineación de los widget hijos
@@ -62,21 +62,31 @@ class IntroductionScreen extends StatelessWidget {
               ///
               /// Imagen
               ///
-              const Image(
-                image: AssetImage("assets/images/mask_group.png"),
-                //height: MediaQuery.of(context).size.height * 0.4,
-                width: 437.85,
-                height: 437.85,
-                fit: BoxFit.scaleDown,
-                 
+              Container(
+                decoration: const BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color : Color(0xff62c6ff),
+                      blurRadius: 10,
+                    ),
+                  ],
+                ),
+                child: const Image(
+                  image: AssetImage("assets/images/mask_group.png"),
+                  //height: MediaQuery.of(context).size.height * 0.4,
+                  width: 437.85,
+                  height: 437.85,
+                  fit: BoxFit.scaleDown,
+                   
+                ),
               ),
-              Center(
+              /*Center(
                 child: Container(
                   width: 250,
                   height: 0.3,
                   color: Colors.black,
                 ),
-              ),
+              ),*/
               ///
               ///espacio
               ///
