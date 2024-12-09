@@ -20,7 +20,7 @@ class IntroductionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffFFFFFF),  //FONDO BLANCO DE PANTALLA 
+      backgroundColor: const Color(0xffFFFFFF), //FONDO BLANCO DE PANTALLA
       body: SafeArea(
         child: Padding(
           padding:
@@ -28,6 +28,7 @@ class IntroductionScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment:
                 CrossAxisAlignment.start, //alineación de los widget hijos
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,    // para que los objetos se separen en la misma distancia
             children: [
               ///
               /// Texto 1
@@ -35,18 +36,10 @@ class IntroductionScreen extends StatelessWidget {
               const Text(
                 "Don't waste your time.",
                 style: TextStyle(
-                  color: Color(0xFF747474),
+                  color: Color(0xFF606060),
                   fontSize: 16,
                 ),
               ),
-
-              ///
-              /// espacio
-              ///
-              const SizedBox(
-                height: 30,
-              ),
-
               ///
               /// texto 2
               ///
@@ -63,23 +56,31 @@ class IntroductionScreen extends StatelessWidget {
               /// Imagen
               ///
               Container(
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
-                      color : Color(0xff62c6ff),
-                      blurRadius: 10,
+                      color: const Color(0xFF62C6FF).withOpacity(0.17),
+                      blurRadius: 50,
+                      spreadRadius: 10, //monto de la caja que a a ser aplicada
                     ),
                   ],
                 ),
-                child: const Image(
-                  image: AssetImage("assets/images/mask_group.png"),
-                  //height: MediaQuery.of(context).size.height * 0.4,
-                  width: 437.85,
-                  height: 437.85,
-                  fit: BoxFit.scaleDown,
-                   
+                child: const Column(
+                  children: [
+                    Image(
+                      image: AssetImage("assets/images/mask_group.png"),
+                      //height: MediaQuery.of(context).size.height * 0.4,
+                      //width: 437.85,
+                      //height: 437.85,
+                      //fit: BoxFit.scaleDown,
+                    ),
+                    Divider(
+                      height: 0,
+                    ),
+                  ],
                 ),
               ),
+
               /*Center(
                 child: Container(
                   width: 250,
@@ -93,28 +94,39 @@ class IntroductionScreen extends StatelessWidget {
               const SizedBox(
                 height: 80,
               ),
+
               ///
               ///Botón
               ///
               Center(
                 child: SizedBox(
-                  width: 312,
+                  width:
+                      double.infinity, //ocupará el 100% del espacio disponible
+                  height: 60,
                   child: FilledButton(
-                      style: ButtonStyle(
-                        backgroundColor:
-                            WidgetStateProperty.all(const Color(0xFFF7AF08)),
-                        shape: WidgetStatePropertyAll(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
+                    style: ButtonStyle(
+                      backgroundColor:
+                          WidgetStateProperty.all(const Color(0xFFFEA725)),
+                      shape: WidgetStatePropertyAll(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
                         ),
                       ),
-                      onPressed: () {
-                        Navigator.pushNamed(context, HomeScreen.routeName);
-                      },
-                      child: const Text("Let's start")),
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, HomeScreen.routeName);
+                    },
+                    child: const Text(
+                      "Let's start",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
                 ),
               ),
+
               /// fin boton
             ],
           ),
