@@ -28,7 +28,7 @@ class IntroductionScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment:
                 CrossAxisAlignment.start, //alineación de los widget hijos
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,    // para que los objetos se separen en la misma distancia
+            //mainAxisAlignment: MainAxisAlignment.spaceAround, // para que los objetos se separen en la misma distancia
             children: [
               ///
               /// Texto 1
@@ -40,6 +40,9 @@ class IntroductionScreen extends StatelessWidget {
                   fontSize: 16,
                 ),
               ),
+              //separador
+              const SizedBox(height: 24),
+
               ///
               /// texto 2
               ///
@@ -51,49 +54,43 @@ class IntroductionScreen extends StatelessWidget {
                   fontSize: 36,
                 ),
               ),
+              //separador
+              const SizedBox(height: 24),
 
               ///
               /// Imagen
               ///
-              Container(
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0xFF62C6FF).withOpacity(0.17),
-                      blurRadius: 50,
-                      spreadRadius: 10, //monto de la caja que a a ser aplicada
-                    ),
-                  ],
-                ),
-                child: const Column(
-                  children: [
-                    Image(
-                      image: AssetImage("assets/images/mask_group.png"),
-                      //height: MediaQuery.of(context).size.height * 0.4,
-                      //width: 437.85,
-                      //height: 437.85,
-                      //fit: BoxFit.scaleDown,
-                    ),
-                    Divider(
-                      height: 0,
-                    ),
-                  ],
-                ),
-              ),
-
-              /*Center(
+              Expanded(
                 child: Container(
-                  width: 250,
-                  height: 0.3,
-                  color: Colors.black,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color(0xFF62C6FF).withOpacity(0.17),
+                        blurRadius: 50,
+                        spreadRadius:
+                            10, //monto de la caja que a a ser aplicada
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    children: [
+                      Image(
+                        image: const AssetImage("assets/images/mask_group.png"),
+                        //height: MediaQuery.of(context).size.height * 0.5,
+                        width: MediaQuery.of(context).size.width > 320              //todo donde la pantalla sea mayor a 320 tome el de abajo
+                            ? 437
+                            : MediaQuery.of(context).size.height * 0.5,        // caso contrario  le dejamos que ocupe la mitad en telefonos pequeños
+                        //width: 437.85,
+                        //height: 437.85,
+                        //fit: BoxFit.scaleDown,
+                      ),
+                      const Divider(height: 0),
+                    ],
+                  ),
                 ),
-              ),*/
-              ///
-              ///espacio
-              ///
-              const SizedBox(
-                height: 80,
               ),
+              //separador
+              const SizedBox(height: 24),
 
               ///
               ///Botón
