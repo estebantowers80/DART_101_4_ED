@@ -111,8 +111,23 @@ class IntroductionScreen extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
+
                       Navigator.pushNamed(context, HomeScreen.routeName);
+                      //si tenemos que reemplazar la pantalla de inicio  por eso esta documentada la pantalla anterior
+                      /// hacemos ahora un pushReplacementNamed -> push otra  pantalla 
+                      /// reemplazamos la pantalla e origen por el destino
+                      
+
+                      //esta elimina todas las rutas y deja una determinada 
+                      //Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+                      ///  se usaría si tuvieramos una pantalla de login ya no quiero que aparezca de nuevo
+                      ///  a no ser que cierre la sesion 
+                      /// 
+                      /// 
+
+                      //Navigator.pushNamedAndRemoveUntil(context, HomeScreen.routeName, (route) => route.isCurrent); 
                     },
+
                     child: const Text(
                       "Let's start",
                       style: TextStyle(
