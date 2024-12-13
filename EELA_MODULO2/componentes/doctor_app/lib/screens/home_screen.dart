@@ -1,3 +1,6 @@
+import 'package:doctor_app/models/medical_service_model.dart';
+import 'package:doctor_app/services/medical_services.dart';
+import 'package:doctor_app/utils/colors.dart';
 import 'package:doctor_app/widgets/doctor_card.dart';
 import 'package:doctor_app/widgets/medical_card.dart';
 import 'package:flutter/material.dart';
@@ -137,6 +140,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ///Gridview
             ///de dos 2 columnas y dos filas
             ///
+            ///
+            ///
+            /*********  DOCUMENTAMOS ESTOR QUE VAMOS A REALIZAR CON SERVICIO *************
             GridView(
               //El gridDelegate define como va a ser la estructura en función de los items que va a tener
               // en el delegate se dice como se va a separar
@@ -156,7 +162,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   srcIcon: "assets/svg/diagnostic.svg",
                   title: "Diagnostic",
                   colorTextIcon: const Color(0xFFFFFFFF),
-                  onTap: () {},
+                  onTap: () {
+                    MedicalServices().getServices();
+                  },
                 ),
 
                 MedicalCard(
@@ -185,6 +193,43 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
+            ************************************************************************************/
+
+            /// FutureBuilder -> consumir un servicio
+            FutureBuilder(
+              /// No es una buena práctica tener el servicio aquí
+              future: MedicalServices().getServices(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                if (snapshot.hasError) {
+                  return Text("Ha ocurrido un error: ${snapshot.error}");
+                }
+                final data = snapshot.data as List<MedicalServiceModel>;
+                return GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                  ),
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    final dato_fila = data[index];
+                    return MedicalCard(
+                      colorBackground: HexColor(dato_fila.color),
+                      colorTextIcon: const Color(0xFFFFFFFF),
+                      srcIcon: dato_fila.icon,
+                      title: dato_fila.name,
+                      onTap: () {},
+                    );
+                  },
+                  itemCount: data.length,
+                );
+              },
+            ),
+
             //otra forma de hacer un gridview
             /*
             GridView.count(
@@ -217,18 +262,35 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const SizedBox(height: 20),
             const DoctorCard(
-                image: "assets/images/doctor_card_1.png",
-                name: "Esteban Torres",
-                speciality: "Cardioloc",
-                medicalCenter: "Monte Sinai Hospital",
-                rating: 5),
+              image: "assets/images/doctor_card_1.png",
+              name: "Esteban Torres",
+              speciality: "Cardioloc",
+              medicalCenter: "Monte Sinai Hospital",
+              rating: 5,
+            ),
             const SizedBox(height: 16),
             const DoctorCard(
-                image: "assets/images/doctor_card_2.png",
-                name: "Manolo Maestre",
-                speciality: "Pediatria",
-                medicalCenter: "Santa Ana Hospital",
-                rating: 3),
+              image: "assets/images/doctor_card_2.png",
+              name: "Manolo Maestre",
+              speciality: "Pediatria",
+              medicalCenter: "Santa Ana Hospital",
+              rating: 3,
+            ),
+            const DoctorCard(
+              image: "assets/images/doctor_card_1.png",
+              name: "Esteban Torres",
+              speciality: "Cardioloc",
+              medicalCenter: "Monte Sinai Hospital",
+              rating: 5,
+            ),
+            const SizedBox(height: 16),
+            const DoctorCard(
+              image: "assets/images/doctor_card_2.png",
+              name: "Manolo Maestre",
+              speciality: "Pediatria",
+              medicalCenter: "Santa Ana Hospital",
+              rating: 10,
+            ),
           ],
         ),
       ),
