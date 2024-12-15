@@ -92,7 +92,7 @@ class MyConterPage extends StatelessWidget {
               ),
               FloatingActionButton(
                   onPressed: () {
-                    print("minus");
+                   cubit.decrement();
                   },
                   foregroundColor: Colors.black,
                   backgroundColor: Colors.red[400],

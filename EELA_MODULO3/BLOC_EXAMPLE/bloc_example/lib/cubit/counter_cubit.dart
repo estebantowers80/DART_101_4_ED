@@ -9,4 +9,11 @@ class CounterCubit extends Cubit<int> {
     final newValue = state + 1;
     emit(newValue);  //emit actualiza el nuevo estado 
   }
+
+    void decrement() {
+    //la variable estado ya existe en la clase block
+    //incrementamos en 1  asinos el nuevo valor 
+    final newValue = state -1;
+    emit(newValue);  //emit actualiza el nuevo estado 
+  }
 }
