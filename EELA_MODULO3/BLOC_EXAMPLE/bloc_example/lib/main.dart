@@ -1,4 +1,3 @@
-
 import 'package:bloc_example/bloc/counter_bloc.dart';
 //import 'package:bloc_example/cubit/counter_cubit.dart';
 import 'package:flutter/material.dart';
@@ -39,10 +38,10 @@ class MyConterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // para conectar el cubit  declaramos una variable para inyectar este cubit que se creo conunter_cubit.dart
     //final cubit = context.read<CounterCubit>();  // el de cubit
-    
+
     //DOS FORMAS DE DEFINIR EL BLOC  funcionan las dos la que esta documentada
-    final counterBloc = context.read<CounterBloc>();    
-    //final CounterBloc counterBloc = context.read();       // esta  es otra forma de definir 
+    final counterBloc = context.read<CounterBloc>();
+    //final CounterBloc counterBloc = context.read();       // esta  es otra forma de definir
     //
     return Scaffold(
       appBar: AppBar(
@@ -52,40 +51,38 @@ class MyConterPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            //aqui mostramos 
+            //aqui mostramos
             const Text('valor del contador actual'),
             // BlocBuilder<CounterCubit, int>(                 //este llama al cubit
             //   builder: (context,state){
-            //     return Text(cubit.state.toString());  // este era con cubit                 
+            //     return Text(cubit.state.toString());  // este era con cubit
             //   },
             // ),
 
-            BlocBuilder<CounterBloc, int>(                 //este llama al blok
-              builder: (context,state){
-                return Text(counterBloc.state.toString());  // este era con cubit 
-                
+            BlocBuilder<CounterBloc, int>(
+              //este llama al blok
+              builder: (context, state) {
+                return Text(counterBloc.state.toString()); // este era con cubit
               },
             ),
 
-
-
-          //   const SizedBox(
-          //     width: double.infinity,
-          //   ),
-          //   const Text(
-          //     "Mi valor contador",
-          //     style: TextStyle(
-          //       fontSize: 30,
-          //       color: Colors.blue,
-          //     ),
-          //   ),
-          //   const Text("10",
-          //     style: TextStyle(
-          //       fontSize: 30,
-          //       fontWeight: FontWeight.bold,
-          //       color: Colors.orange,
-          //     ),
-          //   ),
+            //   const SizedBox(
+            //     width: double.infinity,
+            //   ),
+            //   const Text(
+            //     "Mi valor contador",
+            //     style: TextStyle(
+            //       fontSize: 30,
+            //       color: Colors.blue,
+            //     ),
+            //   ),
+            //   const Text("10",
+            //     style: TextStyle(
+            //       fontSize: 30,
+            //       fontWeight: FontWeight.bold,
+            //       color: Colors.orange,
+            //     ),
+            //   ),
           ],
         ),
       ),
@@ -111,8 +108,8 @@ class MyConterPage extends StatelessWidget {
               ),
               FloatingActionButton(
                   onPressed: () {
-                   // cubit.decrement();  //este ya no va iba con cubit
-                   counterBloc.add(RemoveEvent());
+                    // cubit.decrement();  //este ya no va iba con cubit
+                    counterBloc.add(RemoveEvent());
                   },
                   foregroundColor: Colors.black,
                   backgroundColor: Colors.red[400],

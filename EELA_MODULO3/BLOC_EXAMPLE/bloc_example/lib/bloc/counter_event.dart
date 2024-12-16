@@ -1,8 +1,5 @@
-part of 'counter_bloc.dart';
-
 // ignore: file_names
-
-/*Eventos del bloc*/
+part of 'counter_bloc.dart';
 
 abstract class CounterEvent {}
 
