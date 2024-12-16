@@ -1,6 +1,5 @@
 
-import 'package:bloc_example/bloc/counter_bloc.dart';
-//import 'package:bloc_example/cubit/counter_cubit.dart';
+import 'package:bloc_example/cubit/counter_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,9 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      // cambiamos el anterior por el nuevo con blc
-      //create: (context) => CounterCubit(0),    //estado inicial empieza en cero
-      create: (context) => CounterBloc(),
+      create: (context) => CounterCubit(0),    //estado inicial empieza en cero
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
@@ -38,12 +35,7 @@ class MyConterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // para conectar el cubit  declaramos una variable para inyectar este cubit que se creo conunter_cubit.dart
-    //final cubit = context.read<CounterCubit>();  // el de cubit
-    
-    //DOS FORMAS DE DEFINIR EL BLOC  funcionan las dos la que esta documentada
-    final counterBloc = context.read<CounterBloc>();    
-    //final CounterBloc counterBloc = context.read();       // esta  es otra forma de definir 
-    //
+    final cubit = context.read<CounterCubit>(); 
     return Scaffold(
       appBar: AppBar(
         title: const Text("My Conter Page"),
@@ -54,21 +46,12 @@ class MyConterPage extends StatelessWidget {
           children: [
             //aqui mostramos 
             const Text('valor del contador actual'),
-            // BlocBuilder<CounterCubit, int>(                 //este llama al cubit
-            //   builder: (context,state){
-            //     return Text(cubit.state.toString());  // este era con cubit                 
-            //   },
-            // ),
-
-            BlocBuilder<CounterBloc, int>(                 //este llama al blok
+            BlocBuilder<CounterCubit, int>(                 //este llama al cubit
               builder: (context,state){
-                return Text(counterBloc.state.toString());  // este era con cubit 
-                
+                return Text(cubit.state.toString());
               },
             ),
-
-
-
+            
           //   const SizedBox(
           //     width: double.infinity,
           //   ),
@@ -99,8 +82,7 @@ class MyConterPage extends StatelessWidget {
               FloatingActionButton(
                 onPressed: () {
                   //print("add");
-                  //cubit.increment();  //llamamos la función de cubit
-                  counterBloc.add(AddEvent());
+                  cubit.increment();  //llamamos la función de cubit
                 },
                 foregroundColor: Colors.black,
                 backgroundColor: Colors.green[400],
@@ -111,8 +93,7 @@ class MyConterPage extends StatelessWidget {
               ),
               FloatingActionButton(
                   onPressed: () {
-                   // cubit.decrement();  //este ya no va iba con cubit
-                   counterBloc.add(RemoveEvent());
+                   cubit.decrement();
                   },
                   foregroundColor: Colors.black,
                   backgroundColor: Colors.red[400],
