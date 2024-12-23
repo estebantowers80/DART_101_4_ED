@@ -33,6 +33,8 @@ class GpsBloc extends Bloc<GpsEvent, GpsState> {
     // }
   }
 
+  /// *********************************
+  /// Future para establecer el estatus incial
   FutureOr<void> _onGpsInitialStatusEvent(
     GpsInitialStatusEvent event,
     Emitter<GpsState> emit,
@@ -41,10 +43,16 @@ class GpsBloc extends Bloc<GpsEvent, GpsState> {
     //devuelve un future por que no se sabe el tiempo que se demora
     //primera forma documentamso
     final isGpsEnable = await Geolocator.isLocationServiceEnabled();
+    //verificamos si ya dimos permisos
+    final isLocationPermissionGranted = await ph.Permission.location.isGranted;
     // una vez se ejeucta llo anterior emitimos el estado
-    emit(GpsState(
-      isGpsEnable: isGpsEnable,
-      isLocationPermissionGranted: true,
+    // emit(GpsState(
+    //   isGpsEnable: isGpsEnable,
+    //   isLocationPermissionGranted: true,
+    // ));
+    emit(state.copyWith(
+      isGpsEnable1: isGpsEnable,
+      isLocationPermissionGranted1: isLocationPermissionGranted,
     ));
 
     //otra forma
@@ -55,7 +63,9 @@ class GpsBloc extends Bloc<GpsEvent, GpsState> {
     //});
   }
 
-//********************************************************* */
+  /// *********************************
+  /// Future para el evento cuando cambo el status
+  ///
   FutureOr<void> _onChangeGpsStatusEvent(
     ChangeGpsStatus event,
     Emitter<GpsState> emit,
@@ -73,17 +83,22 @@ class GpsBloc extends Bloc<GpsEvent, GpsState> {
     return emit.forEach(
       Geolocator.getServiceStatusStream(),
       onData: (status) {
-        final isGpsEnable = status == ServiceStatus.enabled;
-        final isLocationGrated = state.isLocationPermissionGranted;
-        return GpsState(
-          isGpsEnable: isGpsEnable,
-          isLocationPermissionGranted: isLocationGrated,
+        final isGpsEnabled = status == ServiceStatus.enabled;
+        //final isLocationGrated = state.isLocationPermissionGranted;
+        // return GpsState(
+        //   isGpsEnable: isGpsEnable,
+        //   isLocationPermissionGranted: isLocationGrated,
+        // );
+        // reemplazamos por el copyWith
+        return state.copyWith(
+          isGpsEnable1: isGpsEnabled,
         );
       },
     );
   }
 
-  //para solicitar permisos
+  /// *********************************
+  /// para solicitar permisos
   FutureOr<void> _onAskLocationPermissionsEvent(
     AskLocationPermissionsEvent event,
     Emitter<GpsState> emit,
@@ -97,11 +112,14 @@ class GpsBloc extends Bloc<GpsEvent, GpsState> {
       return;
     }
     // recuperamos el estado del gps actual
-    final isGpsEnable = state.isGpsEnable;
+    //final isGpsEnable = state.isGpsEnable;
     // el otro estado va en true por que si esta negado va a ir a lapantalla de setttings
 
     emit(
-      GpsState(isGpsEnable: isGpsEnable, isLocationPermissionGranted: true),
-    );
+        // GpsState(
+        //   isGpsEnable: isGpsEnable,
+        //   isLocationPermissionGranted: true,
+        // ),
+        state.copyWith(isLocationPermissionGranted1: true));
   }
 }
