@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tracking_eela/bloc/gps_bloc.dart';
 import 'package:tracking_eela/pages/loading_page.dart';
-import 'package:tracking_eela/ui/app_theme.dart';
+import 'package:tracking_eela/src/core/ui/app_theme.dart';
+import 'package:tracking_eela/src/features/gps/bloc/gps_bloc.dart';
+import 'package:tracking_eela/src/features/map/blocs/cubit/map_cubit.dart';
+import 'package:tracking_eela/src/features/map/blocs/location/location_bloc.dart';
 
 void main() => runApp(const MyApp());
 
@@ -15,11 +17,26 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Material App',
       // todos los widget que esten bajo el blocProvider pueden usar el bloC GpsBloc
-      home: BlocProvider(
-        // el add evento es emejor agregarlo aqui por que si lo ponemos en la otra pantalla se vuelve a llamar varias veces
-        create: (context) => GpsBloc()
-          ..add(GpsInitialStatusEvent())
-          ..add(ChangeGpsStatus()),
+      home: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            // el add evento es emejor agregarlo aqui por que si lo ponemos en la otra pantalla se vuelve a llamar varias veces
+            create: (context) => GpsBloc()
+              ..add(GpsInitialStatusEvent())
+              ..add(ChangeGpsStatus()),
+          ),
+          BlocProvider(
+            // lazy: false,
+            create: (context) => LocationBloc()
+              ..add(
+                InitialLocationEvent(),
+              ),
+          ),
+
+          BlocProvider(
+            create: (context) => MapCubit(),
+          ),
+        ],
         child: const LoadingPage(),
       ),
       theme: AppTheme.light,
