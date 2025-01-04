@@ -11,6 +11,7 @@ part 'location_state.dart';
 class LocationBloc extends Bloc<LocationEvent, LocationState> {
   LocationBloc() : super(LocationState()) {
     on<InitialLocationEvent>(_onInitialLocationEvent);
+    on<StartTrackingUserEvent>(_onStartTrackingUserEvent);
   }
 
   /// localización inicial
@@ -35,5 +36,24 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
     // print(position.longitude);
     final lastKnownLocation = LatLng(position.latitude, position.longitude);
     return emit(state.copyWith(lastKnownLocation: lastKnownLocation));
+  }
+
+  FutureOr<void> _onStartTrackingUserEvent(
+    StartTrackingUserEvent event,
+    Emitter<LocationState> emit,
+  ) {
+    return emit.forEach(
+      Geolocator.getPositionStream(),
+      onData: (position) {
+        print("ACTUALIZA POSICION:");
+        print(position.latitude);
+        print(position.longitude);
+        final lastKnownLocation = LatLng(position.latitude, position.longitude);
+        return state.copyWith(lastKnownLocation: lastKnownLocation);
+
+      },
+
+    );
+
   }
 }

@@ -43,14 +43,26 @@ class MapPage extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton.small(
-        onPressed: () {
-          final lastKnownLocation =
-              context.read<LocationBloc>().state.lastKnownLocation;
-          if (lastKnownLocation == null) return;
-          context.read<MapCubit>().moveCamera(lastKnownLocation);
-        },
-        child: const Icon(Icons.gps_fixed),
+      floatingActionButton: Column(
+        // mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          //boton del zomm
+          FloatingActionButton.small(
+            onPressed: () {},
+            child: Icon(Icons.more_horiz),
+          ),
+          //boton ubicación actual
+          FloatingActionButton.small(
+            onPressed: () {
+              final lastKnownLocation =
+                  context.read<LocationBloc>().state.lastKnownLocation;
+              if (lastKnownLocation == null) return;
+              context.read<MapCubit>().moveCamera(lastKnownLocation);
+            },
+            child: const Icon(Icons.gps_fixed),
+          ),
+        ],
       ),
     );
   }

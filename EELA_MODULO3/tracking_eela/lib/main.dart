@@ -30,7 +30,8 @@ class MyApp extends StatelessWidget {
             create: (context) => LocationBloc()
               ..add(
                 InitialLocationEvent(),
-              ),
+              )
+              ..add(StartTrackingUserEvent()),
           ),
 
           BlocProvider(
